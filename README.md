@@ -58,7 +58,16 @@ Finally, the lanes are overlayed on the original frame and returned by the pipel
 
 ![image7]
 
-###2. Identify potential shortcomings with your current pipeline
+###2. Testing on my own footage
+
+I used the footage from my own dashcam in order to test the pipeline. Although the pipeline had to be recalibrated and the output was not as stable as one would hope, the pipeline proved some levels of success. The video output is available below.
+
+[Test 1](https://youtu.be/0zsHVEKrzDE)
+[Test 2](https://youtu.be/tSJuFduDjcc)
+
+In test 1, it can be seen that the shadow from the passing car causes inaccuracy in data. However, the effect is not very severe and is damped by averaging the data to some extent. In test 2, the effect of a turn on detection pipeline can be seen. Since the lane curvature is too high and the lane is outside of the masking region, we can see that the right lane detection becomes inaccurate.
+
+###3. Identify potential shortcomings with your current pipeline
 
 After testing the pipeline on several video feeds from the examples as well as my own footage, the following shortcomings were noticed:
 * The pipeline has to be recalibrated for different cameras, mounting positions and lighting conditions. Parameters such as the kernel size for Gaussian blur, Hough transform parameters and the Canny edge detection are sensitive to such conditions.
@@ -67,7 +76,7 @@ After testing the pipeline on several video feeds from the examples as well as m
 * The masking region is static in the current method. The lanes would not be detected correctly if the car moves off-center or when the vehicle is in the process of changing lanes.
 * If another vehicle moves in front of the vehicle within the region of interest, the lane data will no longer be accurate.
 
-###3. Suggest possible improvements to your pipeline
+###4. Suggest possible improvements to your pipeline
 
 * To increase the framerate, using a low level language such as C might be more efficient. Using a lower input resolution would also be effective.
 * A more complex masking method could improve the detection under unsteady lighting conditions. One method that is worth exploring is to use the previous frame to _guess_ the position of the lanes in the current frame where the current frame might be noisy.
